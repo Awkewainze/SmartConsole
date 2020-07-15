@@ -1,0 +1,39 @@
+{
+  "name": "client",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "parcel src/index.html --global bootstrap",
+    "build": "parcel build src/index.html --global bootstrap"
+  },
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/bootstrap": "^4.5.0",
+    "@types/react": "^16.9.35",
+    "@types/react-color": "^3.0.2",
+    "@types/react-dom": "^16.9.8",
+    "@types/socket.io-client": "^1.4.33",
+    "parcel-bundler": "^1.12.4",
+    "sass": "^1.26.8",
+    "typescript": "^3.9.5"
+  },
+  "dependencies": {
+    "@types/react-bootstrap": "^1.0.1",
+    "bootstrap": "^4.5.0",
+    "bootstrap-switch-button-react": "^1.2.0",
+    "bootswatch": "^4.5.0",
+    "components": "^0.1.0",
+    "jquery": "^3.5.1",
+    "moment": "^2.26.0",
+    "popper.js": "^1.16.1",
+    "react": "^16.13.1",
+    "react-bootstrap": "^1.0.1",
+    "react-bootstrap-slider": "^2.2.3",
+    "react-color": "^2.18.1",
+    "react-dom": "^16.13.1",
+    "rxjs": "^6.5.5",
+    "socket.io-client": "^2.3.0"
+  }
+}

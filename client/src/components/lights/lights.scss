@@ -1,0 +1,18 @@
+.lights {
+    .left-pane {
+        z-index: 2;
+    }
+    .right-pane {
+        z-index: 2;
+    }
+    .row {
+        margin-bottom: 1rem;
+    }
+    .on-switch-container {
+        width: 100%;
+        text-align: center;
+    }
+    .slider {
+        width: 100%;
+    }
+}
