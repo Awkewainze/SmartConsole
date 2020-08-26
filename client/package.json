@@ -4,13 +4,15 @@
   "description": "",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "parcel src/index.html --global bootstrap",
-    "build": "parcel build src/index.html --global bootstrap"
+    "dev": "parcel src/index.html",
+    "start": "parcel src/index.html",
+    "build": "parcel build src/index.html"
   },
   "author": "",
   "license": "MIT",
   "devDependencies": {
     "@types/bootstrap": "^4.5.0",
+    "@types/js-cookie": "^2.2.6",
     "@types/react": "^16.9.35",
     "@types/react-color": "^3.0.2",
     "@types/react-dom": "^16.9.8",
@@ -26,6 +28,7 @@
     "bootswatch": "^4.5.0",
     "components": "^0.1.0",
     "jquery": "^3.5.1",
+    "js-cookie": "^2.2.1",
     "moment": "^2.26.0",
     "popper.js": "^1.16.1",
     "react": "^16.13.1",
@@ -33,6 +36,7 @@
     "react-bootstrap-slider": "^2.2.3",
     "react-color": "^2.18.1",
     "react-dom": "^16.13.1",
+    "react-touch-screen-keyboard": "^1.0.0",
     "rxjs": "^6.5.5",
     "socket.io-client": "^2.3.0"
   }

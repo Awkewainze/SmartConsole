@@ -17,7 +17,7 @@ export class Time extends React.PureComponent<IProps, IState> {
         this.state = {
             currentTime: moment(),
         };
-        this.timerId = setInterval(this.updateTime.bind(this), 500);
+        this.timerId = setInterval(this.updateTime.bind(this), 100);
     }
 
     render() {

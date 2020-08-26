@@ -3,36 +3,40 @@
 // }
 
 @media (any-pointer: coarse) {
-    html, html * {
+    html,
+    html * {
         cursor: none !important;
     }
+}
+
+html {
+    background: url("./static/background-2.jpg") no-repeat center center fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-blend-mode: color;
+    background-attachment: fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
 }
 
 body {
     min-height: 100vh;
     opacity: 0.9;
+    background-color: transparent !important;
 }
 
 .main-holder {
     min-width: 100%;
     min-height: 100%;
-    // .background {
-        // pointer-events: none;
-        display: block;
-        content: " ";
-        position: absolute;
-        top: 0;
-        left: 0;
-        height: 100%;
-        width: 100%;
-        // z-index: 1;
-        // opacity: 0.4;
-        background-image: url("./static/background-2.jpg");
-        // background-image: url("https://wallpaperplay.com/walls/full/e/2/b/20108.jpg");
-        background-repeat: no-repeat;
-        background-size: cover;
-        background-blend-mode: color;
-    // }
+    // pointer-events: none;
+    display: block;
+    content: " ";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
 }
 
 #root {
@@ -42,9 +46,21 @@ body {
 .noselect {
     -webkit-touch-callout: none; /* iOS Safari */
     -webkit-user-select: none; /* Safari */
-     -khtml-user-select: none; /* Konqueror HTML */
-       -moz-user-select: none; /* Old versions of Firefox */
-        -ms-user-select: none; /* Internet Explorer/Edge */
-            user-select: none; /* Non-prefixed version, currently
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Old versions of Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none; /* Non-prefixed version, currently
                                   supported by Chrome, Edge, Opera and Firefox */
+}
+
+::-webkit-scrollbar {
+    // Width of vertical scroll bar
+    width: 8px;
+    // Height of horizontal scroll bar
+    height: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 8px;
+    background: #273349;
 }

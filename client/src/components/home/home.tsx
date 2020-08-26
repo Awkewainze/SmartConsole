@@ -3,6 +3,7 @@ import { Container, Row, Col } from "react-bootstrap";
 import moment, { Moment } from "moment";
 import { Time } from "../index";
 import "./home.scss";
+import { ConfigurationService } from "~services";
 
 interface IProps {
 
@@ -14,6 +15,7 @@ interface IState {
 
 export class Home extends React.PureComponent<IProps, IState> {
     private timerId: number;
+    private readonly configurationService: ConfigurationService = ConfigurationService.getInstance();
     constructor(props: IProps) {
         super(props);
         this.state = {
@@ -33,8 +35,7 @@ export class Home extends React.PureComponent<IProps, IState> {
                 <Row>
                     <Col>
                         <p className="display-message">
-                            {/* Good {this.getTimeOfDayFromCurrentTime()}, Nova */}
-                            Happy Birthday, Dylan!
+                            Good {this.getTimeOfDayFromCurrentTime()}, {this.configurationService.getName()}
                         </p>
                     </Col>
                 </Row>
@@ -60,6 +61,6 @@ export class Home extends React.PureComponent<IProps, IState> {
     }
 
     private updateTime(): void {
-        this.setState({currentTime: moment()});
+        this.setState({ currentTime: moment() });
     }
 }
