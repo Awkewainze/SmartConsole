@@ -40,6 +40,16 @@ export class ConfigurationService {
         this.kv.setValue(this.connectEndpointKey, endpoint);
     }
 
+    private readonly OpenUVIndexKey = "openUVIndexKey";
+    public getOpenUVIndexKey(): string {
+        return this.kv.getValue(this.OpenUVIndexKey) || "";
+    }
+
+    public setOpenUVIndexKey(value: string): void {
+        this.kv.setValue(this.OpenUVIndexKey, value);
+    }
+
+
     private setDefaultValues(): void {
         this.kv.setValue(this.nameKey, "Set name in Debug");
         this.kv.setValue(this.connectEndpointKey, window.location.protocol + "//" + window.location.hostname + ":" + 3000);

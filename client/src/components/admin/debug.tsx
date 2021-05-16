@@ -1,15 +1,16 @@
 import * as React from "react";
 import { Container, Row } from "react-bootstrap";
 import { ReloadButton, SimpleTouchInput } from "~components";
-import "./admin.scss";
 import { ConfigurationService } from "~services";
+import "./admin.scss";
 
 interface IProps {
 
 }
 
 interface IState {
-    name: string
+    name: string,
+    uvIndexKey: string
 }
 
 export class Admin extends React.PureComponent<IProps, IState> {
@@ -18,7 +19,8 @@ export class Admin extends React.PureComponent<IProps, IState> {
     constructor(props: IProps) {
         super(props);
         this.state = {
-            name: this.configurationService.getName()
+            name: this.configurationService.getName(),
+            uvIndexKey: this.configurationService.getOpenUVIndexKey()
         };
     }
 
@@ -29,6 +31,11 @@ export class Admin extends React.PureComponent<IProps, IState> {
             <Row><SimpleTouchInput value={this.state.name} onChange={value => {
                 this.setState({ name: value });
                 this.configurationService.setName(value);
+            }} /></Row>
+            <Row>OpenUV Key: {this.state.uvIndexKey}</Row>
+            <Row><SimpleTouchInput value={this.state.uvIndexKey} onChange={value => {
+                this.setState({ uvIndexKey: value });
+                this.configurationService.setOpenUVIndexKey(value);
             }} /></Row>
         </Container>)
     }

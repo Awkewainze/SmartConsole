@@ -168,3 +168,4 @@ $RECYCLE.BIN/
 
 dist/
 config.json
+.vs/
