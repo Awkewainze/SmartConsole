@@ -22,6 +22,7 @@
   },
   "dependencies": {
     "@types/react-bootstrap": "^1.0.1",
+    "axios": "^0.21.1",
     "bootstrap": "^4.5.0",
     "bootstrap-switch-button-react": "^1.2.0",
     "bootswatch": "^4.5.0",
