@@ -1,7 +1,7 @@
 import * as React from "react";
-import { Container, Row } from "react-bootstrap";
+import { Button, Container, Row } from "react-bootstrap";
 import { ReloadButton, SimpleTouchInput } from "~components";
-import { ConfigurationService } from "~services";
+import { ConfigurationService, UVService } from "~services";
 import "./admin.scss";
 
 interface IProps {
@@ -10,7 +10,8 @@ interface IProps {
 
 interface IState {
     name: string,
-    uvIndexKey: string
+    uvIndexKey: string,
+    uvIndex: number
 }
 
 export class Admin extends React.PureComponent<IProps, IState> {
@@ -20,8 +21,16 @@ export class Admin extends React.PureComponent<IProps, IState> {
         super(props);
         this.state = {
             name: this.configurationService.getName(),
-            uvIndexKey: this.configurationService.getOpenUVIndexKey()
+            uvIndexKey: this.configurationService.getOpenUVIndexKey(),
+            uvIndex: -1
         };
+    }
+
+    CheckUvIndex() {
+        UVService.getCurrentUVIndex().then(uvIndex => {
+            this.setState({uvIndex});
+            console.log(uvIndex);
+        });
     }
 
     render(): JSX.Element {
@@ -37,6 +46,9 @@ export class Admin extends React.PureComponent<IProps, IState> {
                 this.setState({ uvIndexKey: value });
                 this.configurationService.setOpenUVIndexKey(value);
             }} /></Row>
+            <Row>
+            <Button variant="primary" onClick={() => this.CheckUvIndex()}>Check UV Index</Button>Current UV Index: {this.state.uvIndex}
+            </Row>
         </Container>)
     }
 }
