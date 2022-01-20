@@ -35,7 +35,7 @@ export class Home extends React.PureComponent<IProps, IState> {
                 <Row>
                     <Col>
                         <p className="display-message">
-                            Good {this.getTimeOfDayFromCurrentTime()}, {this.configurationService.getName()}
+                            {this.getGreeting()}
                         </p>
                     </Col>
                 </Row>
@@ -62,5 +62,16 @@ export class Home extends React.PureComponent<IProps, IState> {
 
     private updateTime(): void {
         this.setState({ currentTime: moment() });
+    }
+
+    private getGreeting(): string {
+        let greeting = `Good ${this.getTimeOfDayFromCurrentTime()}`;
+
+        let name = this.configurationService.getName();
+        if (name) {
+            greeting = `${greeting}, ${name}`;
+        }
+
+        return greeting;
     }
 }

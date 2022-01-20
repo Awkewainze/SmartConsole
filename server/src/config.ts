@@ -6,7 +6,7 @@ let configFileExists = false;
 try {
     config = require("../config.json");
     configFileExists = true;
-} catch {}
+} catch { }
 
 export const Config: Configuration = config;
 export const ConfigFileExists: boolean = configFileExists;
@@ -21,5 +21,14 @@ export declare type Configuration = {
     Hue: {
         Username: string,
         ClientKey: string
+    },
+    GoogleCloud?: {
+        TranslateApiKey?: string
+    },
+    Redis?: {
+        host?: string,
+        port?: string,
+        path?: string,
+        password?: string
     }
 };

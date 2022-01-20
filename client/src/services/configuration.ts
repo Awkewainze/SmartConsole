@@ -41,7 +41,7 @@ export class ConfigurationService {
     }
 
     private setDefaultValues(): void {
-        this.kv.setValue(this.nameKey, "Set name in Debug");
+        this.kv.setValue(this.nameKey, "");
         this.kv.setValue(this.connectEndpointKey, window.location.protocol + "//" + window.location.hostname + ":" + 3000);
     }
 
