@@ -1,6 +1,6 @@
 import * as React from "react";
-import { Tabs, Tab } from "react-bootstrap";
-import { Home, Lights, Plants, Admin } from "~components";
+import { Tab, Tabs } from "react-bootstrap";
+import { Admin, Home, Lights } from "../../components";
 import "./main.scss";
 
 type TypedTabs = "home" | "lights" | "plants" | "admin";
@@ -37,9 +37,9 @@ export class Main extends React.PureComponent<IProps, IState> {
                 <Tab eventKey="lights" title="Lights">
                     <Lights />
                 </Tab>
-                <Tab eventKey="plants" title="Plants">
+                {/* <Tab eventKey="plants" title="Plants">
                     <Plants />
-                </Tab>
+                </Tab> */}
                 <Tab eventKey="admin" title="Admin">
                     <Admin />
                 </Tab>

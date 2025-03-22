@@ -1,6 +1,6 @@
-import * as io from "socket.io-client";
 import { Observable, Subject } from "rxjs";
-import { ConfigurationService } from "~services";
+import * as io from "socket.io-client";
+import { ConfigurationService } from "../services";
 
 /**
  * 

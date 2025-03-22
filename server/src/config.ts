@@ -30,5 +30,12 @@ export declare type Configuration = {
         port?: string,
         path?: string,
         password?: string
+    },
+    ServerCoordinates: {
+        Latitude: number,
+        Longitude: number
+    },
+    OpenUV: {
+        ApiKey: string
     }
 };

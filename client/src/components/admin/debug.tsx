@@ -1,8 +1,8 @@
 import * as React from "react";
 import { Container, Row } from "react-bootstrap";
-import { ReloadButton, SimpleTouchInput } from "~components";
+import { ReloadButton, SimpleTouchInput } from "../../components";
+import { ConfigurationService } from "../../services";
 import "./admin.scss";
-import { ConfigurationService } from "~services";
 
 interface IProps {
 

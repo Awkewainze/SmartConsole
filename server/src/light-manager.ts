@@ -1,6 +1,6 @@
 import Api from "node-hue-api/lib/api/Api";
-import { Subject, Observable } from "rxjs";
-import LightState from "node-hue-api/lib/model/lightstate/LightState";
+import Room from "node-hue-api/lib/model/groups/Room";
+import { Observable, Subject } from "rxjs";
 
 export enum DefaultColor {
 	Red = 65280,
@@ -32,12 +32,12 @@ function groupToString(group: SimpleLightGroup): string {
 }
 
 export class LightManager {
-    private readonly api: Api;
+	private readonly api: Api;
 	private lights: Promise<Array<SimpleLight>> = Promise.resolve([]);
 	private groups: Promise<Array<SimpleLightGroup>> = Promise.resolve([]);
-	private readonly lightOrGroupChanged: Subject<{lights: Array<SimpleLight>, groups: Array<SimpleLightGroup>}> =
-		new Subject<{lights: Array<SimpleLight>, groups: Array<SimpleLightGroup>}>();
-    constructor(api: Api) {
+	private readonly lightOrGroupChanged: Subject<{ lights: Array<SimpleLight>, groups: Array<SimpleLightGroup> }> =
+		new Subject<{ lights: Array<SimpleLight>, groups: Array<SimpleLightGroup> }>();
+	constructor(api: Api) {
 		this.api = api;
 		setInterval(this.checkForUpdates.bind(this), 3000);
 		this.checkForUpdates();
@@ -50,9 +50,9 @@ export class LightManager {
 		const oldGroups = this.groups;
 		this.lights = lightsApi.getAll();
 		this.groups = groupsApi.getAll();
-		if((await this.lights).map(x => lightToString(x)).join("--") !== (await oldLights).map(x => lightToString(x)).join("--")
+		if ((await this.lights).map(x => lightToString(x)).join("--") !== (await oldLights).map(x => lightToString(x)).join("--")
 			|| (await this.groups).map(x => groupToString(x)).join("--") !== (await oldGroups).map(x => groupToString(x)).join("--")) {
-			this.lightOrGroupChanged.next({lights: await this.lights, groups: await this.groups});
+			this.lightOrGroupChanged.next({ lights: await this.lights, groups: await this.groups });
 		}
 	}
 
@@ -74,7 +74,11 @@ export class LightManager {
 		await this.checkForUpdates();
 	}
 
-	public getLightOrGroupChangedObservable(): Observable<{lights: Array<SimpleLight>, groups: Array<SimpleLightGroup>}> {
+	public getLightOrGroupChangedObservable(): Observable<{ lights: Array<SimpleLight>, groups: Array<SimpleLightGroup> }> {
 		return this.lightOrGroupChanged.asObservable();
+	}
+
+	public getRooms(): Promise<Room[]> {
+		return this.api.groups.getRooms();
 	}
 }

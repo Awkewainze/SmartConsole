@@ -1,14 +1,14 @@
-import * as React from "react";
-import { Container, Row, Col } from "react-bootstrap";
-import { Time, ColorPicker } from "../index";
-import { Subject, Subscription, interval } from "rxjs";
-import { ColorResult } from "react-color";
-import { CommunicationService } from "../../services"
-import { BoxList } from "~components/box-list/box-list";
 import BootstrapSwitchButton from 'bootstrap-switch-button-react';
+import * as React from "react";
+import { Col, Container, Row } from "react-bootstrap";
 import ReactBootstrapSlider from 'react-bootstrap-slider';
-import "./lights.scss";
+import { ColorResult } from "react-color";
+import { interval, Subject, Subscription } from "rxjs";
 import { debounce } from "rxjs/operators";
+import { BoxList } from "../../components/box-list/box-list";
+import { CommunicationService } from "../../services";
+import { ColorPicker } from "../index";
+import "./lights.scss";
 
 interface IProps {
 }

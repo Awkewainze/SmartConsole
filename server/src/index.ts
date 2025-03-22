@@ -1,9 +1,10 @@
 import { createServer } from "http";
-import socketIO from "socket.io";
 import { v3 } from "node-hue-api";
-import { Config, ConfigFileExists, writeToConfig, Configuration } from "./config";
-import { promisify } from "util";
 import Api from "node-hue-api/lib/api/Api";
+import socketIO from "socket.io";
+import { getDailyProtectionTime, getForecast, getRealTimeUV } from "ts-openuv";
+import { promisify } from "util";
+import { Config, ConfigFileExists, writeToConfig } from "./config";
 import { LightManager } from "./light-manager";
 
 async function main() {
@@ -23,20 +24,38 @@ async function main() {
         client.on("GetGroups", async () => {
             client.emit("Groups", (await lightManager.getGroups()).map(simpleGroupSimpler));
         });
+        client.on("GetRooms", async () => {
+            // client.emit("Rooms", (await lightManager.getRooms()).map(simpleGroupSimpler))
+        })
         client.on("SetLightState", async (lightId: string, state: SimpleLightState) => {
             await lightManager.setLightState(lightId, state);
         });
         client.on("SetGroupState", async (groupId: string, state: SimpleLightState) => {
             await lightManager.setGroupState(groupId, state);
         });
+        client.on("GetOpenUVInfo", async () => {
+            const serverCoordinates = {
+                lat: Config.ServerCoordinates.Latitude,
+                lng: Config.ServerCoordinates.Longitude
+            };
+            const [realTimeUVResponse, dailyProtectionTimeResponse, forecastResponse] = await Promise.all([
+                getRealTimeUV(Config.OpenUV.ApiKey, serverCoordinates),
+                getDailyProtectionTime(Config.OpenUV.ApiKey, serverCoordinates),
+                getForecast(Config.OpenUV.ApiKey, serverCoordinates)
+            ]);
+        });
     });
 
     lightManager.getLightOrGroupChangedObservable().subscribe(x => {
-        io.emit("LightOrGroupChanged", {lights: x.lights.map(simpleLightSimpler), groups: x.groups.map(simpleGroupSimpler)});
+        io.emit("LightOrGroupChanged", { lights: x.lights.map(simpleLightSimpler), groups: x.groups.map(simpleGroupSimpler) });
     });
     const refreshClients = () => io.emit("Refresh");
 
     server.listen(Config.Port);
+    console.log("ready");
+    const rooms = await lightManager.getGroups();
+
+    console.log("Groups", rooms);
 }
 
 function simpleLightSimpler(light: SimpleLight): SuperSimpleLight {
@@ -92,7 +111,14 @@ async function firstRun(): Promise<void> {
                 Username: createdUser.username,
                 ClientKey: createdUser.clientkey
             },
-            Port: default_port
+            Port: default_port,
+            ServerCoordinates: {
+                Latitude: 0,
+                Longitude: 0
+            },
+            OpenUV: {
+                ApiKey: null
+            }
         });
         console.log("Done!");
 
@@ -100,7 +126,7 @@ async function firstRun(): Promise<void> {
         const authenticatedApi = await v3.api.createLocal(ipAddress).connect(createdUser.username);
 
         // Do something with the authenticated user/api
-        const bridgeConfig = await authenticatedApi.configuration.getConfiguration();
+        const bridgeConfig: any = await authenticatedApi.configuration.getConfiguration();
         console.log(`Connected to Hue Bridge: ${bridgeConfig.name} :: ${bridgeConfig.ipaddress}`);
 
     } catch (err) {

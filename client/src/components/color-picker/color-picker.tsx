@@ -1,8 +1,7 @@
-import { CirclePicker, ColorResult } from "react-color";
 import * as React from "react";
-import { Tabs, Tab, Container, Row, Col } from "react-bootstrap";
-import "./color-picker.scss";
+import { CirclePicker, ColorResult } from "react-color";
 import { Subject } from "rxjs";
+import "./color-picker.scss";
 
 type Color = string;
 

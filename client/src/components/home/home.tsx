@@ -1,9 +1,9 @@
-import * as React from "react";
-import { Container, Row, Col } from "react-bootstrap";
 import moment, { Moment } from "moment";
+import * as React from "react";
+import { Col, Container, Row } from "react-bootstrap";
+import { ConfigurationService } from "../../services";
 import { Time } from "../index";
 import "./home.scss";
-import { ConfigurationService } from "~services";
 
 interface IProps {
 

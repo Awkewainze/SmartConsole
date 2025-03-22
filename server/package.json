@@ -17,6 +17,7 @@
     "redis": "^3.0.2",
     "rxjs": "^6.5.5",
     "socket.io": "^2.3.0",
+    "ts-openuv": "^0.1.5",
     "typescript": "^3.9.5",
     "yargs": "^15.3.1"
   },
